@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # No install step on purpose: GhostRecon has no dependencies.
+      - name: Run unit tests (no network)
+        run: python -m unittest discover -s tests -v
+
+      - name: Smoke test the CLI
+        run: |
+          python ghostrecon.py --version
+          python ghostrecon.py --list-platforms | tail -3
+          python ghostrecon.py --help > /dev/null
+          python -m ghostrecon --list-platforms > /dev/null
+
+      - name: Check the CLI rejects a missing username with exit code 2
+        run: |
+          set +e
+          python ghostrecon.py > /dev/null 2>&1
+          code=$?
+          set -e
+          test "$code" -eq 2
