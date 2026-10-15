@@ -1,0 +1,336 @@
+GhostRecon platform verification report
+=======================================
+
+Harness : tools/verify_platforms.py (unchanged bar, two halves)
+Pass 1  : every candidate, both halves
+Pass 2  : candidates that failed pass 1, retried once (transient network
+          failures are the difference between the two passes; a candidate
+          counts as verified if it passed both halves in either pass)
+
+Candidates tested      : 309
+Verified (shipped)     : 122
+Rejected               : 187
+  - probe not discriminating : 157
+  - no real profile found    : 30
+
+How a candidate is rejected:
+  * probe not discriminating - at least one improbable probe username did not
+    come back 'not found' (soft 404, login wall, bot filter or blanket 200),
+    so a 'found' verdict would mean nothing.
+  * no real profile found    - the check answers 'not found' for every known
+    username tried, so the positive path is unproven.
+
+VERIFIED - 122 platforms ship in ghostrecon/platforms.py
+  Big Cartel             commerce   https://{username}.bigcartel.com
+  Buy Me a Coffee        commerce   https://buymeacoffee.com/{username}
+  Cash App               commerce   https://cash.app/${username}
+  Freelancer             commerce   https://www.freelancer.com/u/{username}
+  Grailed                commerce   https://www.grailed.com/{username}
+  Gumroad                commerce   https://gumroad.com/{username}
+  OpenSea                commerce   https://opensea.io/{username}
+  Patreon                commerce   https://www.patreon.com/{username}
+  Poshmark               commerce   https://poshmark.com/closet/{username}
+  Spreadshirt            commerce   https://www.spreadshirt.com/shop/{username}/
+  StockTwits             commerce   https://stocktwits.com/{username}
+  Threadless             commerce   https://www.threadless.com/@{username}
+  TradingView            commerce   https://www.tradingview.com/u/{username}/
+  Venmo                  commerce   https://venmo.com/u/{username}
+  Wellfound              commerce   https://wellfound.com/u/{username}
+  Whatnot                commerce   https://www.whatnot.com/user/{username}
+  Zora                   commerce   https://zora.co/{username}
+  Behance                design     https://www.behance.net/{username}
+  Cara                   design     https://cara.app/{username}
+  DeviantArt             design     https://www.deviantart.com/{username}
+  Dribbble               design     https://dribbble.com/{username}
+  Sketchfab              design     https://sketchfab.com/{username}
+  AtCoder                developer  https://atcoder.jp/users/{username}
+  Bitbucket              developer  https://bitbucket.org/{username}/
+  Codeberg               developer  https://codeberg.org/{username}
+  Codementor             developer  https://www.codementor.io/@{username}
+  Coderwall              developer  https://coderwall.com/{username}
+  Codewars               developer  https://www.codewars.com/users/{username}
+  DZone                  developer  https://dzone.com/users/{username}
+  Dev.to                 developer  https://dev.to/{username}
+  Devfolio               developer  https://devfolio.co/@{username}
+  DigitalOcean           developer  https://www.digitalocean.com/community/users/{username}
+  Docker Hub             developer  https://hub.docker.com/u/{username}
+  Drupal.org             developer  https://www.drupal.org/u/{username}
+  GitHub                 developer  https://github.com/{username}
+  Gitea.com              developer  https://gitea.com/{username}
+  Gitee                  developer  https://gitee.com/{username}
+  Hackaday               developer  https://hackaday.io/{username}
+  Hacker News            developer  https://news.ycombinator.com/user?id={username}
+  Hacker Noon            developer  https://hackernoon.com/u/{username}
+  HackerEarth            developer  https://www.hackerearth.com/@{username}
+  Hackster               developer  https://www.hackster.io/{username}
+  Hugging Face           developer  https://huggingface.co/{username}
+  Instructables          developer  https://www.instructables.com/member/{username}/
+  Kaggle                 developer  https://www.kaggle.com/{username}
+  Launchpad              developer  https://launchpad.net/~{username}
+  Liberapay              developer  https://liberapay.com/{username}/
+  Lobsters               developer  https://lobste.rs/~{username}
+  Netlify                developer  https://{username}.netlify.app
+  OpenCollective         developer  https://opencollective.com/{username}
+  Qiita                  developer  https://qiita.com/{username}
+  Replit                 developer  https://replit.com/@{username}
+  RubyGems               developer  https://rubygems.org/profiles/{username}
+  SourceForge            developer  https://sourceforge.net/u/{username}/profile
+  StackBlitz             developer  https://stackblitz.com/@{username}
+  WordPress.org          developer  https://profiles.wordpress.org/{username}/
+  Zenn                   developer  https://zenn.dev/{username}
+  Chess.com              gaming     https://www.chess.com/member/{username}
+  GOG                    gaming     https://www.gog.com/u/{username}
+  MyAnimeList            gaming     https://myanimelist.net/profile/{username}
+  Steam                  gaming     https://steamcommunity.com/id/{username}
+  Wise Old Man           gaming     https://wiseoldman.net/players/{username}
+  itch.io                gaming     https://{username}.itch.io
+  osu!                   gaming     https://osu.ppy.sh/users/{username}
+  Bandcamp               media      https://bandcamp.com/{username}
+  Flickr                 media      https://www.flickr.com/people/{username}
+  Mixcloud               media      https://www.mixcloud.com/{username}/
+  SmugMug                media      https://{username}.smugmug.com
+  SoundCloud             media      https://soundcloud.com/{username}
+  Spotify                media      https://open.spotify.com/user/{username}
+  TMDB                   media      https://www.themoviedb.org/u/{username}
+  Tapas                  media      https://tapas.io/{username}
+  Vimeo                  media      https://vimeo.com/{username}
+  YouTube                media      https://www.youtube.com/@{username}
+  AllMyLinks             misc       https://allmylinks.com/{username}
+  Are.na                 misc       https://www.are.na/{username}
+  Cal.com                misc       https://cal.com/{username}
+  Calendly               misc       https://calendly.com/{username}
+  Carrd                  misc       https://{username}.carrd.co
+  Indie Hackers          misc       https://www.indiehackers.com/{username}
+  Komoot                 misc       https://www.komoot.com/user/{username}
+  Memrise                misc       https://www.memrise.com/user/{username}/
+  OpenStreetMap          misc       https://www.openstreetmap.org/user/{username}
+  Slashdot               misc       https://slashdot.org/~{username}
+  Untappd                misc       https://untappd.com/user/{username}
+  Wikidata               misc       https://www.wikidata.org/wiki/User:{username}
+  Wikimedia Commons      misc       https://commons.wikimedia.org/wiki/User:{username}
+  Wikipedia              misc       https://en.wikipedia.org/wiki/User:{username}
+  Zotero                 misc       https://www.zotero.org/{username}
+  solo.to                misc       https://solo.to/{username}
+  Bugcrowd               security   https://bugcrowd.com/{username}
+  HackerOne              security   https://hackerone.com/{username}
+  Keybase                security   https://keybase.io/{username}
+  9GAG                   social     https://9gag.com/u/{username}
+  Bluesky                social     https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor={username}.bsky.social
+  Disqus                 social     https://disqus.com/by/{username}/
+  Douban                 social     https://www.douban.com/people/{username}/
+  Gab                    social     https://gab.com/{username}
+  Gravatar               social     https://gravatar.com/{username}
+  Infosec Exchange       social     https://infosec.exchange/@{username}
+  Linktree               social     https://linktr.ee/{username}
+  Mastodon.online        social     https://mastodon.online/@{username}
+  Mastodon.social        social     https://mastodon.social/@{username}
+  Minds                  social     https://www.minds.com/{username}
+  Naver Blog             social     https://blog.naver.com/{username}
+  Pixelfed.social        social     https://pixelfed.social/{username}
+  Snapchat               social     https://www.snapchat.com/add/{username}
+  VK                     social     https://vk.com/{username}
+  X                      social     https://x.com/{username}
+  mas.to                 social     https://mas.to/@{username}
+  mstdn.social           social     https://mstdn.social/@{username}
+  techhub.social         social     https://techhub.social/@{username}
+  Bear Blog              writing    https://{username}.bearblog.dev
+  Goodreads              writing    https://www.goodreads.com/{username}
+  Issuu                  writing    https://issuu.com/{username}
+  LiveJournal            writing    https://{username}.livejournal.com
+  Neocities              writing    https://{username}.neocities.org
+  Speaker Deck           writing    https://speakerdeck.com/{username}
+  Steemit                writing    https://steemit.com/@{username}
+  Substack               writing    https://{username}.substack.com
+  Wattpad                writing    https://www.wattpad.com/user/{username}
+  Write.as               writing    https://write.as/{username}
+
+REJECTED - probe did not discriminate (157)
+  500px                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  AllTrails              zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  AniDB                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  AniList                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Anime-Planet           zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Archive of Our Own     zzq7x9v2klm4p8t=unknown/525 ghostreconprobe9917xq=unknown/525
+  ArtStation             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Audiomack              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Audius                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Backloggd              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Beacons                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Bento                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Bio.link               zzq7x9v2klm4p8t=unknown/502 ghostreconprobe9917xq=unknown/502
+  BitChute               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Blogger                zzq7x9v2klm4p8t=unknown/429 ghostreconprobe9917xq=unknown/429
+  BoardGameGeek          zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Canva                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  CircleCI               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  CodeChef               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  CodePen                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  CodeSandbox            zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Codeforces             zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  CoinMarketCap          zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Couchsurfing           zzq7x9v2klm4p8t=unknown/410 ghostreconprobe9917xq=unknown/410
+  Crates.io              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Crunchyroll            zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Cults3D                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  CurseForge             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  CyberTalents           zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  DLive                  zzq7x9v2klm4p8t=unknown/503 ghostreconprobe9917xq=unknown/503
+  Dailymotion            zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Depop                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Devpost                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Diigo                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Discogs                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Dreamwidth             zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Duolingo               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Dzen                   zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Etsy                   zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  FACEIT                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Facebook               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  FanFiction.net         zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Fandom                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Figma                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Fiverr                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  FurAffinity            zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Game Jolt              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Genius                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Gettr                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Giphy                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  GitGud                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  GitLab                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Glitch                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Grouvee                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Hack The Box           zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  HackThisSite           zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  HackenProof            zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  HackerRank             zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Hashnode               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Imgur                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Immunefi               zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Instagram              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Internet Archive       zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Intigriti              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Khan Academy           zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Kick                   zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Kickstarter            zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Kitsu                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Ko-fi                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Last.fm                zzq7x9v2klm4p8t=unknown/406 ghostreconprobe9917xq=unknown/406
+  LeetCode               zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Lemmy.world            zzq7x9v2klm4p8t=unknown/500 ghostreconprobe9917xq=unknown/500
+  Letterboxd             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  LibraryThing           zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  LinkedIn               zzq7x9v2klm4p8t=unknown/999 ghostreconprobe9917xq=unknown/999
+  Medium                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Meetup                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Mercari                zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  MetaFilter             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Misskey.io             zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  MobyGames              zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  ModDB                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Mozilla Add-ons        zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  MyFitnessPal           zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  NameMC                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Newgrounds             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Nexus Mods             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Observable             zzq7x9v2klm4p8t=unknown/429 ghostreconprobe9917xq=unknown/429
+  Odysee                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Open Bug Bounty        zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  PSNProfiles            zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  PayPal.me              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=not_found/404
+  Payhip                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  PeakD                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Pexels                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Pinboard               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Pinterest              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Planet Minecraft       zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Pocket                 zzq7x9v2klm4p8t=unknown/503 ghostreconprobe9917xq=unknown/503
+  Podbean                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Polywork               zzq7x9v2klm4p8t=unknown/no-response ghostreconprobe9917xq=unknown/no-response
+  Postcrossing           zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=not_found/404
+  Printables             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Product Hunt           zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  PyPI                   zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Quay                   zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Quora                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Rarible                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Rate Your Music        zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Ravelry                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Redbubble              zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Reddit                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  ResearchGate           zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  RetroAchievements      zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Reverb                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Revolut                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Roblox                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Root-Me                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Rumble                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  SPOJ                   zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Scribd                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Shapeways              zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Skillshare             zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  SlideShare             zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Something Awful        zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Sourcegraph            zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Speedrun.com           zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  StackShare             zzq7x9v2klm4p8t=unknown/429 ghostreconprobe9917xq=unknown/429
+  TeePublic              zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Telegram               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  The StoryGraph         zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Thingiverse            zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Threads                zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  TikTok                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Tildes                 zzq7x9v2klm4p8t=not_found/404 ghostreconprobe9917xq=unknown/422
+  Topcoder               zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Trakt                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  TripAdvisor            zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Trovo                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  TrueAchievements       zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Truth Social           zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  TryHackMe              zzq7x9v2klm4p8t=unknown/429 ghostreconprobe9917xq=unknown/429
+  Tumblr                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Twitch                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Udemy                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Unsplash               zzq7x9v2klm4p8t=unknown/401 ghostreconprobe9917xq=unknown/401
+  VSCO                   zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Vercel                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Vivino                 zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  Weibo                  zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  WordPress.com          zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Zazzle                 zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  Zhihu                  zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  eBay                   zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+  edX                    zzq7x9v2klm4p8t=found/200 ghostreconprobe9917xq=found/200
+  iFunny                 zzq7x9v2klm4p8t=unknown/401 ghostreconprobe9917xq=unknown/401
+  npm                    zzq7x9v2klm4p8t=unknown/403 ghostreconprobe9917xq=unknown/403
+
+REJECTED - no real profile found (30)
+  About.me               not_found
+  Beatport               not_found
+  CTFtime                not_found
+  Credly                 not_found
+  Exercism               not_found
+  Fosstodon              not_found
+  Foundation             not_found
+  Foursquare             not_found
+  Hachyderm              not_found
+  Kattis                 not_found
+  Lichess                not_found
+  Luma                   not_found
+  NotABug                not_found
+  NuGet                  not_found
+  Odnoklassniki          not_found
+  Packagist              not_found
+  Pagure                 not_found
+  Peerlist               not_found
+  PeoplePerHour          not_found
+  Raindrop               not_found
+  Royal Road             not_found
+  Society6               not_found
+  SourceHut              not_found
+  Telegraph              not_found
+  ViewBug                not_found
+  YesWeHack              not_found
+  YouPic                 not_found
+  freeCodeCamp           not_found
+  mastodon.world         not_found
+  start.gg               not_found

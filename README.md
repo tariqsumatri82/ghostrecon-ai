@@ -4,8 +4,8 @@
 platforms that username exists on. One command, no install step, Python standard
 library only, and no data leaves your machine.
 
-**52 platforms**, each check verified against the live internet — not copied from
-a list somewhere. See [Verification](#verification-how-the-52-were-chosen).
+**122 platforms**, each check verified against the live internet — not copied from
+a list somewhere. See [Verification](#verification-how-the-122-were-chosen).
 
 > **Status:** working, tested and live on GitHub — clone it and run it today, with
 > no install step. A tagged release will follow; nothing here needs one.
@@ -15,7 +15,7 @@ a list somewhere. See [Verification](#verification-how-the-52-were-chosen).
 ## What it does
 
 ```
-username ──► 52 platform checks, run in parallel ──► found / not found / unknown
+username ──► 122 platform checks, run in parallel ──► found / not found / unknown
 ```
 
 For each platform GhostRecon requests the public profile URL for that username
@@ -33,10 +33,10 @@ run entirely on your own machine.
 ## Captured output
 
 Real output, copied verbatim from two runs made on this machine against the
-live internet on 2026-10-13. Your numbers will differ: `MS` depends on your
+live internet on 2026-10-15. Your numbers will differ: `MS` depends on your
 network, and the number of hits depends on which accounts actually exist.
 
-First eight rows of a full run over all 52 platforms:
+First eight rows of a full run over all 122 platforms:
 
 ```
 $ python3 ghostrecon.py -u tariqsumatri | head -8
@@ -53,7 +53,7 @@ Launchpad        developer  not found  662   https://launchpad.net/~tariqsumatri
 That same run, without the pipe, ends with:
 
 ```
-52 checked, 1 found, 0 unknown in 2.1s
+122 checked, 2 found, 0 unknown in 5.3s
 ```
 
 Only the hits (`--only-found`), complete output:
@@ -147,10 +147,10 @@ explaining the verdict.
 | `1` | Every check was inconclusive — no network, or everything blocked. |
 | `2` | Bad usage: no username given, bad flag, unreadable `--file`. |
 
-## Verification: how the 52 were chosen
+## Verification: how the 122 were chosen
 
 A platform list is only worth anything if the checks actually work, so none of
-the 108 candidates were assumed to work. `tools/verify_platforms.py` tests each
+the 309 candidates were assumed to work. `tools/verify_platforms.py` tests each
 one against the live internet, twice over:
 
 1. **It must discriminate.** Two improbable usernames (`zzq7x9v2klm4p8t`,
@@ -160,11 +160,15 @@ one against the live internet, twice over:
    back `found`. A check that answers `not_found` for everybody is equally
    useless.
 
-Of 108 candidates tested in October 2026, **52 passed both halves** and ship.
-The rest were dropped: wildcard and soft-404 sites that answered "found" for a
-probe (WordPress.com, among others), sites that answered nothing useful for a
-known-good username, and hosts that answered with blocks or timeouts rather than
-a profile page. A shorter, proven list beats a long list of guesses.
+Of 309 candidates tested in October 2026, **122 passed both halves** and ship.
+The other 187 were dropped, and the reason for each one is recorded by name in
+`tools/verification_report.txt`: 157 answered "found" or nothing at all to an
+improbable probe (wildcards, soft 404s, login walls and bot filters), and 30
+answered nothing useful for any known-good username, so their positive path is
+unproven. A shorter, proven list beats a long list of guesses — the count above
+is what survived, not what was hoped for. Candidates that failed their first
+pass were retried at lower concurrency, since a transient network error from a
+single address is not a property of the platform.
 
 Re-run it yourself — the report is machine-readable:
 
@@ -216,7 +220,7 @@ instead of the internet. CI runs the same suite on Python 3.9 and 3.12 (see
 - **Not a scraper of private data.** It reads public profile pages and reports
   existence. It does not collect profile contents, followers, email addresses,
   phone numbers or anything behind a login.
-- **Not exhaustive, and it does not pretend to be.** 52 platforms, verified. The
+- **Not exhaustive, and it does not pretend to be.** 122 platforms, verified. The
   number in this README is the number in `platforms.py`; a test fails if they
   disagree.
 - **Not stealthy.** Requests carry an honest User-Agent naming the tool. Do not

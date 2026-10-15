@@ -3,6 +3,7 @@
 import io
 import json
 import os
+import re
 import sys
 import unittest
 import urllib.error
@@ -140,6 +141,26 @@ class PlatformDataTests(unittest.TestCase):
             # "status" is the default when a platform has no explicit check.
             self.assertIn(platform.get("check", "status"), ("status", "marker"), platform["name"])
             self.assertTrue(platform["category"], platform["name"])
+
+    def test_verification_report_agrees_with_the_shipped_list(self):
+        """The report's real numbers must match the bundled data.
+
+        The README's honesty claim ("X of Y candidates passed") is only worth
+        something if X is the shipped list and Y is the candidate list, so the
+        committed report is checked against both.
+        """
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(root, "tools", "verification_report.txt"),
+                  encoding="utf-8") as handle:
+            report = handle.read()
+        tested = re.search(r"^Candidates tested\s+: (\d+)$", report, re.M)
+        verified = re.search(r"^Verified \(shipped\)\s+: (\d+)$", report, re.M)
+        self.assertIsNotNone(tested, "report must state how many candidates were tested")
+        self.assertIsNotNone(verified, "report must state how many platforms were verified")
+        from ghostrecon.candidates import CANDIDATES
+        self.assertEqual(int(tested.group(1)), len(CANDIDATES))
+        self.assertEqual(int(verified.group(1)), len(PLATFORMS))
+        self.assertIn("%d platforms" % len(PLATFORMS), report)
 
     def test_plateau_count_is_documented(self):
         # The README states a platform count; it must equal the bundled list.

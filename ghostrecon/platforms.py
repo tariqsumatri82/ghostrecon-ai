@@ -280,4 +280,354 @@ PLATFORMS = [
         'category': 'misc',
         'url': 'https://www.indiehackers.com/{username}',
     },
+    {
+        'name': 'Gitee',
+        'category': 'developer',
+        'url': 'https://gitee.com/{username}',
+    },
+    {
+        'name': 'SourceForge',
+        'category': 'developer',
+        'url': 'https://sourceforge.net/u/{username}/profile',
+    },
+    {
+        'name': 'StackBlitz',
+        'category': 'developer',
+        'url': 'https://stackblitz.com/@{username}',
+    },
+    {
+        'name': 'Codewars',
+        'category': 'developer',
+        'url': 'https://www.codewars.com/users/{username}',
+    },
+    {
+        'name': 'HackerEarth',
+        'category': 'developer',
+        'url': 'https://www.hackerearth.com/@{username}',
+    },
+    {
+        'name': 'AtCoder',
+        'category': 'developer',
+        'url': 'https://atcoder.jp/users/{username}',
+    },
+    {
+        'name': 'RubyGems',
+        'category': 'developer',
+        'url': 'https://rubygems.org/profiles/{username}',
+    },
+    {
+        'name': 'DZone',
+        'category': 'developer',
+        'url': 'https://dzone.com/users/{username}',
+    },
+    {
+        'name': 'Hacker Noon',
+        'category': 'developer',
+        'url': 'https://hackernoon.com/u/{username}',
+    },
+    {
+        'name': 'Codementor',
+        'category': 'developer',
+        'url': 'https://www.codementor.io/@{username}',
+    },
+    {
+        'name': 'Hackaday',
+        'category': 'developer',
+        'url': 'https://hackaday.io/{username}',
+    },
+    {
+        'name': 'Hackster',
+        'category': 'developer',
+        'url': 'https://www.hackster.io/{username}',
+    },
+    {
+        'name': 'Instructables',
+        'category': 'developer',
+        'url': 'https://www.instructables.com/member/{username}/',
+    },
+    {
+        'name': 'Devfolio',
+        'category': 'developer',
+        'url': 'https://devfolio.co/@{username}',
+    },
+    {
+        'name': 'WordPress.org',
+        'category': 'developer',
+        'url': 'https://profiles.wordpress.org/{username}/',
+    },
+    {
+        'name': 'Drupal.org',
+        'category': 'developer',
+        'url': 'https://www.drupal.org/u/{username}',
+    },
+    {
+        'name': 'Coderwall',
+        'category': 'developer',
+        'url': 'https://coderwall.com/{username}',
+    },
+    {
+        'name': 'X',
+        'category': 'social',
+        'url': 'https://x.com/{username}',
+    },
+    {
+        'name': 'Snapchat',
+        'category': 'social',
+        'url': 'https://www.snapchat.com/add/{username}',
+    },
+    {
+        'name': 'Infosec Exchange',
+        'category': 'social',
+        'url': 'https://infosec.exchange/@{username}',
+    },
+    {
+        'name': 'mstdn.social',
+        'category': 'social',
+        'url': 'https://mstdn.social/@{username}',
+    },
+    {
+        'name': 'Mastodon.online',
+        'category': 'social',
+        'url': 'https://mastodon.online/@{username}',
+    },
+    {
+        'name': 'mas.to',
+        'category': 'social',
+        'url': 'https://mas.to/@{username}',
+    },
+    {
+        'name': 'techhub.social',
+        'category': 'social',
+        'url': 'https://techhub.social/@{username}',
+    },
+    {
+        'name': 'Gab',
+        'category': 'social',
+        'url': 'https://gab.com/{username}',
+    },
+    {
+        'name': 'Minds',
+        'category': 'social',
+        'url': 'https://www.minds.com/{username}',
+    },
+    {
+        'name': '9GAG',
+        'category': 'social',
+        'url': 'https://9gag.com/u/{username}',
+    },
+    {
+        'name': 'Douban',
+        'category': 'social',
+        'url': 'https://www.douban.com/people/{username}/',
+    },
+    {
+        'name': 'Naver Blog',
+        'category': 'social',
+        'url': 'https://blog.naver.com/{username}',
+    },
+    {
+        'name': 'Pixelfed.social',
+        'category': 'social',
+        'url': 'https://pixelfed.social/{username}',
+    },
+    {
+        'name': 'TMDB',
+        'category': 'media',
+        'url': 'https://www.themoviedb.org/u/{username}',
+    },
+    {
+        'name': 'SmugMug',
+        'category': 'media',
+        'url': 'https://{username}.smugmug.com',
+    },
+    {
+        'name': 'Tapas',
+        'category': 'media',
+        'url': 'https://tapas.io/{username}',
+    },
+    {
+        'name': 'Sketchfab',
+        'category': 'design',
+        'url': 'https://sketchfab.com/{username}',
+    },
+    {
+        'name': 'Cara',
+        'category': 'design',
+        'url': 'https://cara.app/{username}',
+    },
+    {
+        'name': 'Steemit',
+        'category': 'writing',
+        'url': 'https://steemit.com/@{username}',
+    },
+    {
+        'name': 'Issuu',
+        'category': 'writing',
+        'url': 'https://issuu.com/{username}',
+    },
+    {
+        'name': 'LiveJournal',
+        'category': 'writing',
+        'url': 'https://{username}.livejournal.com',
+    },
+    {
+        'name': 'Write.as',
+        'category': 'writing',
+        'url': 'https://write.as/{username}',
+    },
+    {
+        'name': 'Bear Blog',
+        'category': 'writing',
+        'url': 'https://{username}.bearblog.dev',
+    },
+    {
+        'name': 'Neocities',
+        'category': 'writing',
+        'url': 'https://{username}.neocities.org',
+    },
+    {
+        'name': 'osu!',
+        'category': 'gaming',
+        'url': 'https://osu.ppy.sh/users/{username}',
+    },
+    {
+        'name': 'itch.io',
+        'category': 'gaming',
+        'url': 'https://{username}.itch.io',
+    },
+    {
+        'name': 'GOG',
+        'category': 'gaming',
+        'url': 'https://www.gog.com/u/{username}',
+    },
+    {
+        'name': 'Wise Old Man',
+        'category': 'gaming',
+        'url': 'https://wiseoldman.net/players/{username}',
+    },
+    {
+        'name': 'Venmo',
+        'category': 'commerce',
+        'url': 'https://venmo.com/u/{username}',
+    },
+    {
+        'name': 'Cash App',
+        'category': 'commerce',
+        'url': 'https://cash.app/${username}',
+    },
+    {
+        'name': 'OpenSea',
+        'category': 'commerce',
+        'url': 'https://opensea.io/{username}',
+    },
+    {
+        'name': 'Zora',
+        'category': 'commerce',
+        'url': 'https://zora.co/{username}',
+    },
+    {
+        'name': 'Threadless',
+        'category': 'commerce',
+        'url': 'https://www.threadless.com/@{username}',
+    },
+    {
+        'name': 'Spreadshirt',
+        'category': 'commerce',
+        'url': 'https://www.spreadshirt.com/shop/{username}/',
+    },
+    {
+        'name': 'Poshmark',
+        'category': 'commerce',
+        'url': 'https://poshmark.com/closet/{username}',
+    },
+    {
+        'name': 'Grailed',
+        'category': 'commerce',
+        'url': 'https://www.grailed.com/{username}',
+    },
+    {
+        'name': 'Big Cartel',
+        'category': 'commerce',
+        'url': 'https://{username}.bigcartel.com',
+    },
+    {
+        'name': 'Whatnot',
+        'category': 'commerce',
+        'url': 'https://www.whatnot.com/user/{username}',
+    },
+    {
+        'name': 'Freelancer',
+        'category': 'commerce',
+        'url': 'https://www.freelancer.com/u/{username}',
+    },
+    {
+        'name': 'Wellfound',
+        'category': 'commerce',
+        'url': 'https://wellfound.com/u/{username}',
+    },
+    {
+        'name': 'StockTwits',
+        'category': 'commerce',
+        'url': 'https://stocktwits.com/{username}',
+    },
+    {
+        'name': 'TradingView',
+        'category': 'commerce',
+        'url': 'https://www.tradingview.com/u/{username}/',
+    },
+    {
+        'name': 'Wikidata',
+        'category': 'misc',
+        'url': 'https://www.wikidata.org/wiki/User:{username}',
+    },
+    {
+        'name': 'Wikimedia Commons',
+        'category': 'misc',
+        'url': 'https://commons.wikimedia.org/wiki/User:{username}',
+    },
+    {
+        'name': 'Komoot',
+        'category': 'misc',
+        'url': 'https://www.komoot.com/user/{username}',
+    },
+    {
+        'name': 'Untappd',
+        'category': 'misc',
+        'url': 'https://untappd.com/user/{username}',
+    },
+    {
+        'name': 'Memrise',
+        'category': 'misc',
+        'url': 'https://www.memrise.com/user/{username}/',
+    },
+    {
+        'name': 'Calendly',
+        'category': 'misc',
+        'url': 'https://calendly.com/{username}',
+    },
+    {
+        'name': 'Cal.com',
+        'category': 'misc',
+        'url': 'https://cal.com/{username}',
+    },
+    {
+        'name': 'Carrd',
+        'category': 'misc',
+        'url': 'https://{username}.carrd.co',
+    },
+    {
+        'name': 'solo.to',
+        'category': 'misc',
+        'url': 'https://solo.to/{username}',
+    },
+    {
+        'name': 'AllMyLinks',
+        'category': 'misc',
+        'url': 'https://allmylinks.com/{username}',
+    },
+    {
+        'name': 'Zotero',
+        'category': 'misc',
+        'url': 'https://www.zotero.org/{username}',
+    },
 ]
