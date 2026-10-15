@@ -9,3 +9,5 @@ dist/
 verification.json
 out/
 *.local.json
+verification.json
+!tools/verification.json

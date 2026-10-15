@@ -41,19 +41,19 @@ First eight rows of a full run over all 122 platforms:
 ```
 $ python3 ghostrecon.py -u tariqsumatri | head -8
 == tariqsumatri ==
-PLATFORM         CATEGORY   STATUS     MS    URL
---------------------------------------------------------------------------------------------------------------------------------------
-GitHub           developer  not found  235   https://github.com/tariqsumatri
-Codeberg         developer  not found  823   https://codeberg.org/tariqsumatri
-Gitea.com        developer  not found  168   https://gitea.com/tariqsumatri
-Bitbucket        developer  not found  315   https://bitbucket.org/tariqsumatri/
-Launchpad        developer  not found  662   https://launchpad.net/~tariqsumatri
+PLATFORM           CATEGORY   STATUS     MS    URL
+----------------------------------------------------------------------------------------------------------------------------------------
+GitHub             developer  not found  243   https://github.com/tariqsumatri
+Codeberg           developer  not found  831   https://codeberg.org/tariqsumatri
+Gitea.com          developer  not found  172   https://gitea.com/tariqsumatri
+Bitbucket          developer  not found  348   https://bitbucket.org/tariqsumatri/
+Launchpad          developer  not found  716   https://launchpad.net/~tariqsumatri
 ```
 
 That same run, without the pipe, ends with:
 
 ```
-122 checked, 2 found, 0 unknown in 5.3s
+122 checked, 2 found, 0 unknown in 4.7s
 ```
 
 Only the hits (`--only-found`), complete output:
@@ -63,9 +63,9 @@ $ python3 ghostrecon.py -u tariqsumatri --only-found
 == tariqsumatri ==
 PLATFORM  CATEGORY  STATUS  MS   URL
 ---------------------------------------------------------------------------
-Flickr    media     FOUND   293  https://www.flickr.com/people/tariqsumatri
-52 checked, 1 found, 0 unknown in 1.6s
-
+Flickr    media     FOUND   311  https://www.flickr.com/people/tariqsumatri
+X         social    FOUND   785  https://x.com/tariqsumatri
+122 checked, 2 found, 0 unknown in 5.0s
 ```
 
 Both captures come from the commands exactly as shown; nothing is edited and
@@ -170,12 +170,26 @@ is what survived, not what was hoped for. Candidates that failed their first
 pass were retried at lower concurrency, since a transient network error from a
 single address is not a property of the platform.
 
-Re-run it yourself — the report is machine-readable:
+Familiar names were dropped on that same evidence, because a famous site is not
+a working check. **PyPI** returned `200` for both improbable probe usernames, so
+its check answers "found" for anything and measures nothing. **npm**, **CodePen**
+and **LeetCode** answered `403` to the probes instead of a clean not-found, so
+nothing shows they can tell a real profile from a blocked request. All four are
+named in the rejection list below, next to the reason.
+
+The evidence from the pass that produced this list is committed:
+`tools/verification_report.txt` is the readable version with every rejection
+named, and `tools/verification.json` is the machine-readable one the generator
+consumes. Re-run the whole pass yourself:
 
 ```bash
 python3 tools/verify_platforms.py --json verification.json
-python3 tools/build_platforms.py --report verification.json
+python3 tools/build_platforms.py --report tools/verification.json
 ```
+
+`--report` ships only the candidates that passed both halves, so regenerating
+from the committed `tools/verification.json` reproduces `ghostrecon/platforms.py`
+exactly — the shipped list is the proven list, not a hand-picked one.
 
 ## Adding a platform (a one-line change)
 

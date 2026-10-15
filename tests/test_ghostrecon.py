@@ -162,6 +162,22 @@ class PlatformDataTests(unittest.TestCase):
         self.assertEqual(int(verified.group(1)), len(PLATFORMS))
         self.assertIn("%d platforms" % len(PLATFORMS), report)
 
+    def test_machine_readable_report_matches_the_shipped_list(self):
+        """The JSON evidence must name the shipped set exactly.
+
+        It is the input to `build_platforms.py --report`, so if it drifted the
+        shipped list could no longer be reproduced from the committed evidence.
+        """
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(root, "tools", "verification.json"),
+                  encoding="utf-8") as handle:
+            rows = json.load(handle)["report"]
+        from ghostrecon.candidates import CANDIDATES
+        self.assertEqual(len(rows), len(CANDIDATES))
+        proven = {row["name"] for row in rows
+                  if row["verdict"] == "verified" and row["discriminates"]}
+        self.assertEqual(proven, {platform["name"] for platform in PLATFORMS})
+
     def test_plateau_count_is_documented(self):
         # The README states a platform count; it must equal the bundled list.
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

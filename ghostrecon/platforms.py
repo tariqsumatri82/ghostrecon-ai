@@ -1,7 +1,7 @@
 """Platform definitions.
 
 Every entry here was checked against the live internet with
-`python3 tools/verify_platforms.py`; VERIFICATION.md records the raw evidence.
+`python3 tools/verify_platforms.py`; tools/verification_report.txt records the raw evidence.
 Adding a platform is a one-line change to this list and nothing else.
 
 Fields:
