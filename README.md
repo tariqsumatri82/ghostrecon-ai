@@ -4,8 +4,8 @@
 platforms that username exists on. One command, no install step, Python standard
 library only, and no data leaves your machine.
 
-**52 platforms**, each check verified against the live internet — not copied from
-a list somewhere. See [Verification](#verification-how-the-52-were-chosen).
+**122 platforms**, each check verified against the live internet — not copied from
+a list somewhere. See [Verification](#verification-how-the-122-were-chosen).
 
 > **Status:** working, tested and live on GitHub — clone it and run it today, with
 > no install step. A tagged release will follow; nothing here needs one.
@@ -15,7 +15,7 @@ a list somewhere. See [Verification](#verification-how-the-52-were-chosen).
 ## What it does
 
 ```
-username ──► 52 platform checks, run in parallel ──► found / not found / unknown
+username ──► 122 platform checks, run in parallel ──► found / not found / unknown
 ```
 
 For each platform GhostRecon requests the public profile URL for that username
@@ -33,27 +33,27 @@ run entirely on your own machine.
 ## Captured output
 
 Real output, copied verbatim from two runs made on this machine against the
-live internet on 2026-10-13. Your numbers will differ: `MS` depends on your
+live internet on 2026-10-15. Your numbers will differ: `MS` depends on your
 network, and the number of hits depends on which accounts actually exist.
 
-First eight rows of a full run over all 52 platforms:
+First eight rows of a full run over all 122 platforms:
 
 ```
 $ python3 ghostrecon.py -u tariqsumatri | head -8
 == tariqsumatri ==
-PLATFORM         CATEGORY   STATUS     MS    URL
---------------------------------------------------------------------------------------------------------------------------------------
-GitHub           developer  not found  235   https://github.com/tariqsumatri
-Codeberg         developer  not found  823   https://codeberg.org/tariqsumatri
-Gitea.com        developer  not found  168   https://gitea.com/tariqsumatri
-Bitbucket        developer  not found  315   https://bitbucket.org/tariqsumatri/
-Launchpad        developer  not found  662   https://launchpad.net/~tariqsumatri
+PLATFORM           CATEGORY   STATUS     MS    URL
+----------------------------------------------------------------------------------------------------------------------------------------
+GitHub             developer  not found  243   https://github.com/tariqsumatri
+Codeberg           developer  not found  831   https://codeberg.org/tariqsumatri
+Gitea.com          developer  not found  172   https://gitea.com/tariqsumatri
+Bitbucket          developer  not found  348   https://bitbucket.org/tariqsumatri/
+Launchpad          developer  not found  716   https://launchpad.net/~tariqsumatri
 ```
 
 That same run, without the pipe, ends with:
 
 ```
-52 checked, 1 found, 0 unknown in 2.1s
+122 checked, 2 found, 0 unknown in 4.7s
 ```
 
 Only the hits (`--only-found`), complete output:
@@ -63,9 +63,9 @@ $ python3 ghostrecon.py -u tariqsumatri --only-found
 == tariqsumatri ==
 PLATFORM  CATEGORY  STATUS  MS   URL
 ---------------------------------------------------------------------------
-Flickr    media     FOUND   293  https://www.flickr.com/people/tariqsumatri
-52 checked, 1 found, 0 unknown in 1.6s
-
+Flickr    media     FOUND   311  https://www.flickr.com/people/tariqsumatri
+X         social    FOUND   785  https://x.com/tariqsumatri
+122 checked, 2 found, 0 unknown in 5.0s
 ```
 
 Both captures come from the commands exactly as shown; nothing is edited and
@@ -147,10 +147,10 @@ explaining the verdict.
 | `1` | Every check was inconclusive — no network, or everything blocked. |
 | `2` | Bad usage: no username given, bad flag, unreadable `--file`. |
 
-## Verification: how the 52 were chosen
+## Verification: how the 122 were chosen
 
 A platform list is only worth anything if the checks actually work, so none of
-the 108 candidates were assumed to work. `tools/verify_platforms.py` tests each
+the 309 candidates were assumed to work. `tools/verify_platforms.py` tests each
 one against the live internet, twice over:
 
 1. **It must discriminate.** Two improbable usernames (`zzq7x9v2klm4p8t`,
@@ -160,18 +160,36 @@ one against the live internet, twice over:
    back `found`. A check that answers `not_found` for everybody is equally
    useless.
 
-Of 108 candidates tested in October 2026, **52 passed both halves** and ship.
-The rest were dropped: wildcard and soft-404 sites that answered "found" for a
-probe (WordPress.com, among others), sites that answered nothing useful for a
-known-good username, and hosts that answered with blocks or timeouts rather than
-a profile page. A shorter, proven list beats a long list of guesses.
+Of 309 candidates tested in October 2026, **122 passed both halves** and ship.
+The other 187 were dropped, and the reason for each one is recorded by name in
+`tools/verification_report.txt`: 157 answered "found" or nothing at all to an
+improbable probe (wildcards, soft 404s, login walls and bot filters), and 30
+answered nothing useful for any known-good username, so their positive path is
+unproven. A shorter, proven list beats a long list of guesses — the count above
+is what survived, not what was hoped for. Candidates that failed their first
+pass were retried at lower concurrency, since a transient network error from a
+single address is not a property of the platform.
 
-Re-run it yourself — the report is machine-readable:
+Familiar names were dropped on that same evidence, because a famous site is not
+a working check. **PyPI** returned `200` for both improbable probe usernames, so
+its check answers "found" for anything and measures nothing. **npm**, **CodePen**
+and **LeetCode** answered `403` to the probes instead of a clean not-found, so
+nothing shows they can tell a real profile from a blocked request. All four are
+named in the rejection list below, next to the reason.
+
+The evidence from the pass that produced this list is committed:
+`tools/verification_report.txt` is the readable version with every rejection
+named, and `tools/verification.json` is the machine-readable one the generator
+consumes. Re-run the whole pass yourself:
 
 ```bash
 python3 tools/verify_platforms.py --json verification.json
-python3 tools/build_platforms.py --report verification.json
+python3 tools/build_platforms.py --report tools/verification.json
 ```
+
+`--report` ships only the candidates that passed both halves, so regenerating
+from the committed `tools/verification.json` reproduces `ghostrecon/platforms.py`
+exactly — the shipped list is the proven list, not a hand-picked one.
 
 ## Adding a platform (a one-line change)
 
@@ -216,7 +234,7 @@ instead of the internet. CI runs the same suite on Python 3.9 and 3.12 (see
 - **Not a scraper of private data.** It reads public profile pages and reports
   existence. It does not collect profile contents, followers, email addresses,
   phone numbers or anything behind a login.
-- **Not exhaustive, and it does not pretend to be.** 52 platforms, verified. The
+- **Not exhaustive, and it does not pretend to be.** 122 platforms, verified. The
   number in this README is the number in `platforms.py`; a test fails if they
   disagree.
 - **Not stealthy.** Requests carry an honest User-Agent naming the tool. Do not
